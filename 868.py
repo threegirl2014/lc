@@ -1,15 +1,17 @@
-class Solution:
-    def transpose(self, A):
+class Solution(object):
+    def binaryGap(self, N):
         """
-        :type A: List[List[int]]
-        :rtype: List[List[int]]
+        :type N: int
+        :rtype: int
         """
-        row = len(A)
-        col = len(A[0])
-        result = [[A[j][i] for j in range(row)] for i in range(col)]
-        return result
-#       return [list(item) for item in zip(*A)]
-
-if __name__ == '__main__':
-    print(Solution().transpose([[1,2,3],[4,5,6],[7,8,9]]))
-    print(Solution().transpose([[1,2,3],[4,5,6]]))
+        bin_n = bin(N)[2:]
+        gap = 0
+        first = -1
+        for index, item in enumerate(bin_n):
+            if item == '1':
+                if first == -1:
+                    first = index
+                else:
+                    gap = max(gap, index - first)
+                    first = index
+        return gap
